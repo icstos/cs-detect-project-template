@@ -1,0 +1,29 @@
+project_name: project_name
+project_name_zh: 中文项目名称
+task_type: 目标检测 # 图像分类, 目标检测, 语义分割
+
+# --- 【必填项】 ---
+nc: 3 # 目标类别
+names: ["category_1", "category_2", "category_3"] # 类别名称
+names_zh: ["类别_1", "类别_2", "类别_3"]
+
+# 数据集路径
+path: /data/project_name/datasets/xx/
+# train: images/train # 训练集图像（与path的相对路径）
+# val: images/val # 验证集图像（与path的相对路径）
+# test: # 测试集图像（与path的相对路径）
+train: train.txt
+val: val.txt
+test:
+# --- 【/必填项】 ---
+
+# 数据集本地相对路径
+images:
+labels:
+
+# 数据集图像大小
+img_origin_size: [4096, 4096] # [height, width]
+# 模型检测输入大小
+img_model_size: [2048, 2048] # [height, width]
+# 模型检测输入图像区域
+img_region: [1024, 1024, 3072, 3072] # [x1, y1, x2, y2]
