@@ -1,0 +1,12 @@
+PERIOD: China
+
+DEVICE: 0
+CONF_THRES: 0.25
+IOU_THRES: 0.45
+
+
+# 模型配置
+XX_MODEL_PATH: weights/xx.pt
+CLASSES: ["category_1", "category_2", "category_3"]
+CLASS_THRES: [0.5, 0.5, 0.5]
+XX_IMG_SIZE : [8192, 1024] 

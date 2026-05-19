@@ -20,7 +20,7 @@ os.environ['YOLO_VERBOSE'] = 'False'
 # PROJECT_ROOT = sys.path[0]
 PROJECT_ROOT = Path(__file__).parent.absolute()
 OUTPUT_DIR = Path(PROJECT_ROOT, "output")
-
+LOG_DIR = Path(OUTPUT_DIR, "log")
 
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -32,6 +32,7 @@ CATEGORY_NAMES = ["category_1", "category_2", "category_3"]
 
 # --- START: torch ---
 DEVICE_ID = 0
+# DEVICE = torch.device("cpu")
 # torch.cuda.set_device(DEVICE_ID)
 DEVICE = torch.device(f"cuda:{DEVICE_ID}" if torch.cuda.is_available() else "cpu")
 
