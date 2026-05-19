@@ -1,9 +1,12 @@
-from pathlib import Path
-import numpy as np
 import cv2
+import traceback
+import numpy as np
+from pathlib import Path
+from ultralytics import YOLO
+
 import config
 
-import traceback
+MODEL = YOLO(model=config.MODEL_PATH, task="detect")
 
 
 def get_params_list(model_name):
@@ -19,7 +22,8 @@ def xx_predictor(img: np.ndarray) -> list:
     return ng_obj_list
 
 
-def main_detect(img: np.ndarray):
+def main_detect(img: np.ndarray, product_id: str = "unknown") -> dict:
+    print(f'--- Processing Product ID: {product_id} ---')
     try:
         if len(img.shape) == 3:
             img_detect = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -37,5 +41,16 @@ def main_detect(img: np.ndarray):
     return final_result_dict
 
 
+def main():
+    # Example usage
+    img_path = "path_to_your_image.jpg"
+    img = cv2.imread(img_path)
+    if img is None:
+        print(f"Failed to read image from {img_path}")
+        return
+    result = main_detect(img)
+    print(result)
+
+
 if __name__ == "__main__":
-    pass
+    main()

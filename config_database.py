@@ -12,3 +12,12 @@ pool = redis.ConnectionPool(
     retry_on_timeout=True,  # 超时自动重试
 )
 r_cli = redis.Redis(connection_pool=pool)
+
+
+mysql_info = dict(
+    host="127.0.0.1",
+    port=3306,
+    user="user_name",
+    passwd="password",
+    database="database_name",
+)

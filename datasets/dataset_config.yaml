@@ -3,11 +3,15 @@ project_name_zh: 中文项目名称
 task_type: 目标检测 # 图像分类, 目标检测, 语义分割
 
 # --- 【必填项】 ---
-nc: 3 # 目标类别
+nc: 3 # Number of Classes，类别数量
 names: ["category_1", "category_2", "category_3"] # 类别名称
 names_zh: ["类别_1", "类别_2", "类别_3"]
 
 # 数据集路径
+# train and val data as 
+# 1) directory: path/images/, 
+# 2) file: path/images.txt, or 
+# 3) list: [path1/images/, path2/image/]
 path: /data/project_name/datasets/xx/
 # train: images/train # 训练集图像（与path的相对路径）
 # val: images/val # 验证集图像（与path的相对路径）
