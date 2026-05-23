@@ -18,10 +18,17 @@ MODEL = YOLO(model=config.MODEL_PATH, task="detect")
 
 def get_params_list(model_name):
 
-    xx_thres = config.r_cli.hget(f'cfg_{model_name}', 'xx_thres')
+    xx_thres = config.r.hget(f'cfg_{model_name}', 'xx_thres')
     xx_thres = 0.3 if xx_thres is None else float(xx_thres)
 
     return [xx_thres]
+
+
+def get_img_by_redis(model_name):
+    img_bytes = config.r.brpop(model_name)[1]
+    img_msg = config.r.brpop(model_name)[1]
+
+    return [img_bytes, img_msg]
 
 
 @Time.timer
@@ -68,7 +75,6 @@ def xx_predictor(img: np.ndarray) -> list:
         }
         final_result_list.append(tmp_dict)
     return final_result_list
-    return ng_obj_list
 
 
 def main_detect(

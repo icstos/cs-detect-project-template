@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 import torch
 from my_types import RunMode, ImgSize
-from config_database import r_cli
+from config_database import r
 
 RUN_MODE = RunMode.DEV
 
