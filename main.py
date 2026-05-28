@@ -1,5 +1,6 @@
 import cv2
 import sys
+import torch
 import traceback
 import numpy as np
 from pathlib import Path
@@ -13,7 +14,20 @@ LOGGER = Logger("xx.log", name="xx", run_mode=config.RUN_MODE)
 LOGGER.info('--- Start Running ---')
 
 
+torch.set_printoptions(sci_mode=False)
 MODEL = YOLO(model=config.MODEL_PATH, task="detect")
+# warm GPU
+img_origin_torch = torch.empty(
+    (1, 3, config.CAM_IMG_SIZE.height, config.CAM_IMG_SIZE.width),
+    dtype=torch.half,
+    device=config.DEVICE,
+)
+
+img_model_torch = torch.empty(
+    (1, 3, config.MODEL_IMG_SIZE.height, config.MODEL_IMG_SIZE.width),
+    dtype=torch.half,
+    device=config.DEVICE,
+)
 
 
 def get_params_list(model_name):
@@ -149,6 +163,20 @@ def main():
     )
     LOGGER.info(result)
     return result
+
+
+def main_by_monitor_redis():
+    while True:
+        if int(config.r.llen(config.MODEL_NAME)) > 0:
+            detect_msgs = get_img_by_redis(model_name=config.MODEL_NAME)
+            img_bytes = detect_msgs[0]
+            img_msg = detect_msgs[1]
+            try:
+                params_list = get_params_list(config.MODEL_NAME)
+                rst = xx_predictor(img_bytes)
+                LOGGER.info(f'{img_msg}: {params_list}: {rst}')
+            except Exception as e:
+                LOGGER.error(f"Error in main_by_monitor_redis: {e}")
 
 
 if __name__ == "__main__":

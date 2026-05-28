@@ -11,7 +11,7 @@ pool = redis.ConnectionPool(
     socket_connect_timeout=5,  # 连接超时（秒）
     retry_on_timeout=True,  # 超时自动重试
 )
-r_cli = redis.Redis(connection_pool=pool)
+r = redis.Redis(connection_pool=pool)
 
 
 mysql_info = dict(
