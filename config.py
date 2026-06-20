@@ -33,7 +33,8 @@ MODEL_PATH = Path(PROJECT_ROOT, 'xx.engine')
 DATA_PATH = Path(PROJECT_ROOT, r'datasets/dataset_config.yaml')
 # -- END: 路径配置 --
 
-CATEGORY_NAMES = ["category_1", "category_2", "category_3"]
+CLASSES = ["category_1", "category_2", "category_3"]
+CLASS_CONFS = [0.25, 0.25, 0.3]
 
 
 @dataclass

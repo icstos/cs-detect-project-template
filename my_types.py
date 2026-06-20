@@ -15,7 +15,7 @@ class ImgSize:
 
 
 @dataclass
-class BBox:
+class Box:
     x1: int = -1
     y1: int = -1
     x2: int = -1
